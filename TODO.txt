@@ -1,0 +1,43 @@
+	#####################################################################
+	# Known Issues: 
+	#	- all PHP code in one line: cant trace parameters back
+	#		$a=$_GET['cmd']; exec($a);
+	#			fix: nur an tokens orientieren
+	#			$a = $b; system($a);
+	#			alles hinter assignment operator gehört zu $a bis ";" -> prob if($a=fopen($b)){...}
+	#	- function calls before declaration not trace able 
+	#		(gilt auch für rekursive funktionen )
+	#		blöd bei mehreren includes :(
+	#####################################################################
+	#
+	# xinha exploit video , Camtasia
+	#
+	# C:\wamp\www\nuitduhack\6/
+	#	--> require breaked nach erfolgreichem include im if zweig und verpasst LFI im anderen if zweig
+	#
+	# D:/bad bank backup 090110/team1_jail/data/intern/account/index.php // false positive
+	# D:/bad bank backup 090110/team1_jail/data/intern/chat/index.php	// false negative wenn auf vuln umgecoded
+	# E:/scantest/quotestest.php	// false positive mit quote analyse und functionssprung
+	#
+	# Datentypen: VarDeclare->type = array/string/int implementieren
+	# 	--> bug mit arithmetic detection : $e = ($a . $b) + 1;
+	#	--> array probleme
+	#
+	# diff results
+	#	--> scan history: die letzten 3 results in javascript vars speichern
+	#	--> option scan results zu speichern (einfach den html output pro tree speichern)
+	#	--> nach neuem scan bereits gespeicherte trees abgleichen lassen und löschen
+	#
+	# #E:/scantest/multiline.php	# endende klammer bei ternary operator
+	# e:/scantest//cfg.php
+	# e:/scantest//if.php
+	#
+	# htmlentities auf ENT_QUOTES checken
+	#
+	#-----------------------------------------
+	# http://de2.php.net/manual/en/language.oop5.php
+	# $db = new PDO('sqlite:.db'); $db->query($_GET['sql']);
+	# $xpath = new DOMXPath($doc); $xpath->query($expression);
+	# $doc = domxml_open_file($xml_file); $ctx = $doc->xpath_new_context(); $ctx->xpath_eval($xpath_query);
+	# T_EXTENDS: nur $vuln_classes($a) nach $vuln_classes($b) kopieren um die funktionen zu erben
+	##################################################################### 
