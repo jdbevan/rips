@@ -34,8 +34,18 @@ include 'config/general.php';
 	<script src="js/hotpatch.js"></script>
 	<script src="js/netron.js"></script>
 	<title>RIPS - A static source code analyser for vulnerabilities in PHP scripts</title>
+    <script>
+        var readyStateCheckInterval = setInterval(function() {
+            if (document.readyState === "complete") {
+                clearInterval(readyStateCheckInterval);
+
+                draginit();
+                document.onmousemove = getPos;
+            }
+        }, 10);
+    </script>
 </head>
-<body onload="draginit();" onmousemove="getPos(event);" onmouseup="mouseButtonPos='up';">
+<body onmouseup="mouseButtonPos='up';">
 
 <div class="menu">
 	<div style="float:left; width:100%;">
